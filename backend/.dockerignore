@@ -1,0 +1,9 @@
+
+target/
+.git/
+.idea/
+.vscode/
+*.log
+startup-error.txt
+startup-tidb-error*.txt
+.mvn/wrapper/maven-wrapper.jar
