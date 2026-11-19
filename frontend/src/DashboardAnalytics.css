@@ -292,3 +292,119 @@
     gap: 8px;
   }
 }
+
+
+/* ==========================================
+   DARK THEME - DASHBOARD ANALYTICS
+   Preserve existing card and chart layouts
+========================================== */
+
+:root[data-theme="dark"] .da-card {
+  background: var(--surface) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border) !important;
+  box-shadow: var(--card-shadow);
+}
+
+/* Analytics headings */
+:root[data-theme="dark"] .da-heading h2,
+:root[data-theme="dark"] .da-card-heading h3 {
+  color: var(--text-primary) !important;
+}
+
+/* Analytics descriptions */
+:root[data-theme="dark"] .da-heading .muted,
+:root[data-theme="dark"] .da-card-heading p,
+:root[data-theme="dark"] .da-empty {
+  color: var(--text-secondary) !important;
+}
+
+/* Chart labels and values */
+:root[data-theme="dark"] .da-chart-label {
+  color: #cbd5e1 !important;
+}
+
+:root[data-theme="dark"] .da-chart-label strong {
+  color: #f8fafc !important;
+}
+
+/* Chart background tracks */
+:root[data-theme="dark"] .da-bar-track {
+  background: #374151 !important;
+}
+
+/* Preserve existing chart bar colors */
+:root[data-theme="dark"] .da-bar-in {
+  background: #16a779 !important;
+}
+
+:root[data-theme="dark"] .da-bar-out {
+  background: #e18b46 !important;
+}
+
+:root[data-theme="dark"] .da-bar-category {
+  background: #6385ff !important;
+}
+
+/* Product information */
+:root[data-theme="dark"] .da-product-info strong,
+:root[data-theme="dark"] .da-product-value,
+:root[data-theme="dark"] .da-stock-info > strong,
+:root[data-theme="dark"] .da-table td strong {
+  color: var(--text-primary) !important;
+}
+
+:root[data-theme="dark"] .da-product-info small,
+:root[data-theme="dark"] .da-stock-info small {
+  color: var(--text-secondary) !important;
+}
+
+/* List separators */
+:root[data-theme="dark"] .da-list-row {
+  border-color: var(--border) !important;
+}
+
+/* Analytics table */
+:root[data-theme="dark"] .da-table {
+  background: var(--surface) !important;
+}
+
+:root[data-theme="dark"] .da-table th {
+  background: var(--surface-secondary) !important;
+  color: #cbd5e1 !important;
+  border-color: var(--border) !important;
+}
+
+:root[data-theme="dark"] .da-table td {
+  background: var(--surface) !important;
+  color: #cbd5e1 !important;
+  border-color: var(--border) !important;
+}
+
+/* Analytics status labels */
+:root[data-theme="dark"] .da-count,
+:root[data-theme="dark"] .da-status-low {
+  background: var(--danger-bg) !important;
+  color: var(--danger-text) !important;
+}
+
+:root[data-theme="dark"] .da-status-in {
+  background: var(--success-bg) !important;
+  color: var(--success-text) !important;
+}
+
+:root[data-theme="dark"] .da-status-out {
+  background: var(--warning-bg) !important;
+  color: var(--warning-text) !important;
+}
+
+/* Smooth theme transition */
+.da-card,
+.da-table th,
+.da-table td,
+.da-list-row {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}

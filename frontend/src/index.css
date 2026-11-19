@@ -1,112 +1,175 @@
+
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  color-scheme: light;
+
+  --bg: #f5f7fb;
+  --surface: #ffffff;
+  --surface-secondary: #f8fafc;
+
+  --text-primary: #172033;
+  --text-secondary: #64748b;
+
+  --border: #e5e7eb;
+
+  --primary: #4266e9;
+  --primary-hover: #3455d1;
+
+  --success-bg: #e5f8ee;
+  --success-text: #16784a;
+
+  --danger-bg: #fff0f0;
+  --danger-text: #b42318;
+
+  --warning-bg: #fff3e8;
+  --warning-text: #bd6b28;
+
+  --sidebar-bg: #ffffff;
+  --sidebar-text: #475569;
+  --sidebar-active-bg: #edf2ff;
+
+  --card-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+:root[data-theme="dark"] {
+  color-scheme: dark;
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+  --bg: #111827;
+  --surface: #1f2937;
+  --surface-secondary: #273449;
+
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+
+  --border: #374151;
+
+  --primary: #7392ff;
+  --primary-hover: #8ba5ff;
+
+  --success-bg: #123c2d;
+  --success-text: #6ee7b7;
+
+  --danger-bg: #452626;
+  --danger-text: #fca5a5;
+
+  --warning-bg: #49351f;
+  --warning-text: #fdba74;
+
+  --sidebar-bg: #172033;
+  --sidebar-text: #cbd5e1;
+  --sidebar-active-bg: #304362;
+
+  --card-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
 }
 
-body {
-  margin: 0;
-}
-
-#root {
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+* {
   box-sizing: border-box;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
   margin: 0;
+  padding: 0;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Global theme styling */
+body,
+.app,
+.main {
+  background: var(--bg) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Main application surfaces */
+.sidebar,
+.topbar,
+.account-panel,
+.stat-card,
+.table-card,
+.form-card,
+.analytics-card,
+.chart-card,
+.dashboard-card {
+  background: var(--surface) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border) !important;
+}
+
+/* Text */
+h1, h2, h3, h4, h5,
+p,
+label,
+.account-name,
+.breadcrumb-current {
+  color: var(--text-primary);
+}
+
+/* Secondary text */
+.account-role,
+.breadcrumb-label,
+.muted {
+  color: var(--text-secondary);
+}
+
+/* Form controls */
+input,
+select,
+textarea {
+  background: var(--surface) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border) !important;
+}
+
+/* Tables */
+table,
+thead,
+tbody,
+tr,
+td,
+th {
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+th {
+  background: var(--surface-secondary);
+}
+
+/* Theme toggle */
+.theme-toggle {
+  background: var(--surface);
+  color: var(--text-primary);
+  border-color: var(--border);
 }

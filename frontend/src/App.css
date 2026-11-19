@@ -812,3 +812,512 @@ textarea:focus {
     max-width: 75px;
   }
 }
+
+/* Light and dark theme toggle */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 13px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--surface);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--surface-secondary);
+  border-color: var(--primary);
+}
+
+.theme-toggle svg {
+  flex-shrink: 0;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .topbar {
+    flex-wrap: wrap;
+  }
+
+  .theme-toggle {
+    padding: 8px 10px;
+  }
+}
+
+
+/* ==========================================
+   INVENTRACK - DARK THEME CORRECTIONS
+   Existing layout and components preserved
+========================================== */
+
+:root[data-theme="dark"] body,
+:root[data-theme="dark"] .app,
+:root[data-theme="dark"] .main,
+:root[data-theme="dark"] .content {
+  background-color: var(--bg) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Sidebar */
+:root[data-theme="dark"] .sidebar {
+  background-color: var(--sidebar-bg) !important;
+  color: var(--sidebar-text) !important;
+  border-right: 1px solid var(--border);
+}
+
+:root[data-theme="dark"] .brand h2,
+:root[data-theme="dark"] .brand span,
+:root[data-theme="dark"] .menu-label,
+:root[data-theme="dark"] .sidebar-footer,
+:root[data-theme="dark"] .nav-item {
+  color: var(--sidebar-text) !important;
+}
+
+:root[data-theme="dark"] .nav-item.active {
+  background-color: var(--sidebar-active-bg) !important;
+  color: #ffffff !important;
+}
+
+/* Top navigation */
+:root[data-theme="dark"] .topbar,
+:root[data-theme="dark"] .account-panel {
+  background-color: var(--surface) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border) !important;
+}
+
+:root[data-theme="dark"] .breadcrumb-label,
+:root[data-theme="dark"] .breadcrumb-current,
+:root[data-theme="dark"] .breadcrumb-divider,
+:root[data-theme="dark"] .account-name {
+  color: var(--text-primary) !important;
+}
+
+:root[data-theme="dark"] .account-avatar {
+  background-color: #304362 !important;
+  color: #dbeafe !important;
+}
+
+:root[data-theme="dark"] .account-role {
+  background-color: #304362 !important;
+  color: #bfdbfe !important;
+}
+
+:root[data-theme="dark"] .account-divider {
+  background-color: var(--border) !important;
+}
+
+/* Page headings */
+:root[data-theme="dark"] h1,
+:root[data-theme="dark"] h2,
+:root[data-theme="dark"] h3,
+:root[data-theme="dark"] h4,
+:root[data-theme="dark"] .page-heading h1,
+:root[data-theme="dark"] .content h1,
+:root[data-theme="dark"] .content h2,
+:root[data-theme="dark"] .form-heading h2,
+:root[data-theme="dark"] .table-heading h2,
+:root[data-theme="dark"] .card-heading h2,
+:root[data-theme="dark"] .stock-movement-card .form-heading h2 {
+  color: var(--text-primary) !important;
+}
+
+:root[data-theme="dark"] p,
+:root[data-theme="dark"] label,
+:root[data-theme="dark"] .muted,
+:root[data-theme="dark"] .form-grid label,
+:root[data-theme="dark"] .stat-card span,
+:root[data-theme="dark"] .stat-card small,
+:root[data-theme="dark"] .empty-state {
+  color: var(--text-secondary) !important;
+}
+
+/* Cards and sections */
+:root[data-theme="dark"] .stat-card,
+:root[data-theme="dark"] .table-card,
+:root[data-theme="dark"] .form-card {
+  background-color: var(--surface) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border) !important;
+  box-shadow: var(--card-shadow);
+}
+
+:root[data-theme="dark"] .stat-card strong {
+  color: var(--text-primary) !important;
+}
+
+/* Table headers, rows and columns */
+:root[data-theme="dark"] table,
+:root[data-theme="dark"] thead,
+:root[data-theme="dark"] tbody {
+  background-color: var(--surface) !important;
+  color: var(--text-primary) !important;
+}
+
+:root[data-theme="dark"] th {
+  background-color: var(--surface-secondary) !important;
+  color: #cbd5e1 !important;
+  border-color: var(--border) !important;
+}
+
+:root[data-theme="dark"] td {
+  background-color: var(--surface) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border) !important;
+}
+
+:root[data-theme="dark"] tr:hover td {
+  background-color: var(--surface-secondary) !important;
+}
+
+/* Form fields and dropdowns */
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] select,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] .search-input,
+:root[data-theme="dark"] .form-grid input,
+:root[data-theme="dark"] .form-grid select {
+  background-color: var(--surface-secondary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border) !important;
+}
+
+:root[data-theme="dark"] input::placeholder,
+:root[data-theme="dark"] textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+:root[data-theme="dark"] select option {
+  background-color: var(--surface);
+  color: var(--text-primary);
+}
+
+:root[data-theme="dark"] input:focus,
+:root[data-theme="dark"] select:focus,
+:root[data-theme="dark"] textarea:focus {
+  background-color: var(--surface-secondary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--primary) !important;
+}
+
+/* Secondary buttons */
+:root[data-theme="dark"] .secondary-button {
+  background-color: var(--surface-secondary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border) !important;
+}
+
+/* Theme toggle */
+:root[data-theme="dark"] .theme-toggle {
+  background-color: var(--surface-secondary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border) !important;
+}
+
+/* Status labels */
+:root[data-theme="dark"] .badge.good {
+  background-color: var(--success-bg) !important;
+  color: var(--success-text) !important;
+}
+
+:root[data-theme="dark"] .badge.low {
+  background-color: var(--warning-bg) !important;
+  color: var(--warning-text) !important;
+}
+
+:root[data-theme="dark"] .success-message {
+  background-color: var(--success-bg) !important;
+  color: var(--success-text) !important;
+}
+
+:root[data-theme="dark"] .error-message {
+  background-color: var(--danger-bg) !important;
+  color: var(--danger-text) !important;
+}
+
+:root[data-theme="dark"] .delete-button {
+  background-color: var(--danger-bg) !important;
+  color: var(--danger-text) !important;
+  border-color: var(--border) !important;
+}
+
+:root[data-theme="dark"] .profile {
+  background-color: var(--surface-secondary) !important;
+  color: var(--text-primary) !important;
+}
+
+
+
+/* ==========================================
+   LIGHT THEME - SIDEBAR CORRECTIONS
+========================================== */
+
+:root:not([data-theme="dark"]) .sidebar {
+  background-color: #ffffff !important;
+  color: #334155 !important;
+  border-right: 1px solid #e5e7eb;
+}
+
+:root:not([data-theme="dark"]) .brand h2 {
+  color: #172033 !important;
+}
+
+:root:not([data-theme="dark"]) .brand span,
+:root:not([data-theme="dark"]) .menu-label,
+:root:not([data-theme="dark"]) .sidebar-footer {
+  color: #64748b !important;
+}
+
+:root:not([data-theme="dark"]) .nav-item {
+  color: #334155 !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+:root:not([data-theme="dark"]) .nav-item:hover {
+  background-color: #f1f5f9 !important;
+  color: #1e40af !important;
+}
+
+:root:not([data-theme="dark"]) .nav-item.active {
+  background-color: #304362 !important;
+  color: #ffffff !important;
+}
+
+/* Clickable cursor in both themes */
+.sidebar .nav-item,
+.sidebar .nav-item *,
+.sidebar a,
+.sidebar button {
+  cursor: pointer !important;
+}
+
+/* InvenTrack logo */
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.brand-logo {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #ffffff;
+  display: block;
+}
+
+.brand h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 750;
+}
+
+/* Sidebar bottom theme control */
+.sidebar-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.sidebar-status {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: inherit;
+}
+
+.sidebar-theme-toggle {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-theme-toggle:hover {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.sidebar-theme-toggle:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+/* Account avatar trigger and dropdown */
+.account-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  z-index: 30;
+}
+
+.account-menu-trigger {
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.account-menu-trigger:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 4px rgba(84, 120, 245, 0.12);
+}
+
+.account-menu-trigger:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.account-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 240px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.16);
+  z-index: 100;
+  animation: account-dropdown-in 0.16s ease-out;
+}
+
+.account-dropdown-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  min-width: 0;
+}
+
+.account-dropdown-name {
+  max-width: 100%;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.account-dropdown-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+.account-dropdown-logout {
+  width: 100%;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--danger-bg);
+  color: var(--danger-text);
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.account-dropdown-logout:hover {
+  filter: brightness(0.97);
+}
+
+.account-dropdown-logout:focus-visible {
+  outline: 2px solid var(--danger-text);
+  outline-offset: 2px;
+}
+
+@keyframes account-dropdown-in {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+:root[data-theme="dark"] .account-dropdown {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 600px) {
+  .account-dropdown {
+    width: min(240px, calc(100vw - 28px));
+  }
+}
+
+/* Separate report sections */
+.report-card {
+  margin-bottom: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+.report-card:last-child {
+  margin-bottom: 0;
+}
+
+/* Reports page - separate report cards */
+.reports-page > .table-card + .table-card {
+  margin-top: 24px;
+}
+
+/* Keep each report visually distinct */
+.reports-page > .table-card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* Add clear separation between the two Reports sections */
+.low-stock-report-card {
+  margin-top: 24px !important;
+}
+
+/* Reports page: larger gap between report cards */
+.reports-page .table-card {
+  margin-bottom: 40px !important;
+}
+
+.reports-page .low-stock-report-card {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import StockMovements from "./StockMovements";
 import "./App.css";
 import DashboardAnalytics from "./DashboardAnalytics";
@@ -8,6 +8,7 @@ import ActivityLogs from "./ActivityLogs";
 import { useAuth } from "./auth/AuthContext";
 import Login from "./auth/Login";
 import { apiFetch } from "./services/api";
+import { useTheme } from "./ThemeContext";
 
 const emptyForm = {
   name: "",
@@ -39,6 +40,28 @@ function App() {
   const [reportError, setReportError] = useState("");
   const [reportFromDate, setReportFromDate] = useState("");
   const [reportToDate, setReportToDate] = useState("");
+  const { theme, toggleTheme } = useTheme();
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
+  const accountMenuRef = useRef(null);
+
+  useEffect(() => {
+    function handleOutsideClick(event) {
+      if (accountMenuRef.current && !accountMenuRef.current.contains(event.target)) {
+        setIsAccountMenuOpen(false);
+      }
+    }
+
+    function handleEscape(event) {
+      if (event.key === "Escape") setIsAccountMenuOpen(false);
+    }
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
 
 
 async function loadProducts() {
@@ -461,15 +484,15 @@ if (!response.ok) {
   return (
     <div className="app">
       <aside className="sidebar">
-        <div className="brand">
-          <div className="brand-icon">I</div>
-          <div>
-            <h2>InvenTrack</h2>
-            <span>Inventory management</span>
-          </div>
-        </div>
+       <div className="brand">
+  <img
+    src="/inventrack-logo.jpeg"
+    alt="InvenTrack Logo"
+    className="brand-logo"
+  />
 
-        <p className="menu-label">WORKSPACE</p>
+  <h2>InvenTrack</h2>
+</div>
 
         <div
           role="button"
@@ -635,66 +658,105 @@ if (!response.ok) {
         )}
 
         <div className="sidebar-footer">
-          <span className="status-dot" />
-          Inventory workspace
-        </div>
+  <div className="sidebar-status">
+    <span className="status-dot" />
+    Inventory workspace
+  </div>
+
+  <button
+    type="button"
+    className="sidebar-theme-toggle"
+    onClick={toggleTheme}
+    title={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+    aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+  >
+    {theme === "light" ? (
+      <svg viewBox="0 0 24 24" width="21" height="21"
+        fill="none" stroke="currentColor" strokeWidth="2"
+        strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+      </svg>
+    ) : (
+      <svg viewBox="0 0 24 24" width="21" height="21"
+        fill="none" stroke="currentColor" strokeWidth="2"
+        strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+      </svg>
+    )}
+  </button>
+</div>
       </aside>
 
       <main className="main">
+        <header className="topbar">
+          <div className="topbar-breadcrumb">
+            <span className="breadcrumb-label">Workspace</span>
+            <span className="breadcrumb-divider">/</span>
+            <span className="breadcrumb-current">{activePage}</span>
+          </div>
 
-<header className="topbar">
-  <div className="topbar-breadcrumb">
-    <span className="breadcrumb-label">Workspace</span>
-    <span className="breadcrumb-divider">/</span>
-    <span className="breadcrumb-current">{activePage}</span>
-  </div>
+          <div className="account-menu" ref={accountMenuRef}>
+            <button
+              type="button"
+              className="account-avatar account-menu-trigger"
+              onClick={() => setIsAccountMenuOpen((open) => !open)}
+              aria-label="Open account menu"
+              aria-haspopup="menu"
+              aria-expanded={isAccountMenuOpen}
+              title="Account menu"
+            >
+              {(user.fullName || "User")
+                .trim()
+                .split(/\s+/)
+                .slice(0, 2)
+                .map((part) => part.charAt(0))
+                .join("")
+                .toUpperCase()}
+            </button>
 
-  <div className="account-panel">
-    <div className="account-avatar">
-      {(user.fullName || "User")
-        .trim()
-        .split(/\s+/)
-        .slice(0, 2)
-        .map((part) => part.charAt(0))
-        .join("")
-        .toUpperCase()}
-    </div>
+            {isAccountMenuOpen && (
+              <div className="account-dropdown" role="menu">
+                <div className="account-dropdown-details">
+                  <span className="account-dropdown-name">
+                    {user.fullName || "User"}
+                  </span>
+                  <span className="account-role">
+                    {user.role || "STAFF"}
+                  </span>
+                </div>
 
-    <div className="account-details">
-      <span className="account-name">
-        {user.fullName || "User"}
-      </span>
+                <div className="account-dropdown-divider" />
 
-      <span className="account-role">
-        {user.role || "STAFF"}
-      </span>
-    </div>
-
-    <div className="account-divider" />
-
-    <button
-      type="button"
-      className="account-logout"
-      onClick={logout}
-    >
-      <svg
-        viewBox="0 0 24 24"
-        width="17"
-        height="17"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M10 17l5-5-5-5" />
-        <path d="M15 12H3" />
-        <path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6" />
-      </svg>
-      <span>Logout</span>
-    </button>
-  </div>
+                <button
+                  type="button"
+                  className="account-dropdown-logout"
+                  role="menuitem"
+                  onClick={() => {
+                    setIsAccountMenuOpen(false);
+                    logout();
+                  }}
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="17"
+                    height="17"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M10 17l5-5-5-5" />
+                    <path d="M15 12H3" />
+                    <path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6" />
+                  </svg>
+                  <span>Logout</span>
+                </button>
+              </div>
+            )}
+          </div>
 </header>
 
 
@@ -705,7 +767,7 @@ if (!response.ok) {
         ) : activePage === "Suppliers" ? (
           <SupplierManagement />
         ) : activePage === "Archived Products" ? (
-          <section className="content">
+          <section className="content reports-page">
             <div className="page-heading">
               <div>
                 <p className="eyebrow">INVENTORY MANAGEMENT</p>
@@ -804,7 +866,7 @@ if (!response.ok) {
 
             {error && <div className="error-message">{error}</div>}
 
-            <section className="table-card">
+            <section className="table-card low-stock-report-card">
               <div className="table-heading">
                 <div>
                   <h2>Low-stock products</h2>
