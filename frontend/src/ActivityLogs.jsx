@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 
 import { useAuth } from "./auth/AuthContext";
 import { apiFetch } from "./services/api";
+import { formatIstDateTime } from "./utils/dateUtils";
 
 function ActivityLogs() {
   const { token } = useAuth();
@@ -73,21 +74,8 @@ function ActivityLogs() {
   ).size;
 
   function formatDate(dateValue) {
-    if (!dateValue) return "—";
-
-    const date = new Date(dateValue);
-
-    if (Number.isNaN(date.getTime())) return "—";
-
-    return date.toLocaleString("en-IN", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    });
-  }
+  return formatIstDateTime(dateValue);
+}
 
   function getActionLabel(action) {
     const labels = {
@@ -254,7 +242,7 @@ function ActivityLogs() {
 
                     <td>{log.performedBy}</td>
 
-                    <td>{formatDate(log.createdAt)}</td>
+                    <td>{formatIstDateTime(log.createdAt)}</td>
 
                   </tr>
                 ))}
