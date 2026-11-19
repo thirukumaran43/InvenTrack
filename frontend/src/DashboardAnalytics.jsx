@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "./auth/AuthContext";
 import { apiFetch } from "./services/api";
 import "./DashboardAnalytics.css";
+import { formatIstDateTime } from "./utils/dateUtils";
 
 function DashboardAnalytics({ products = [], formatCurrency }) {
   const { token } = useAuth();
@@ -108,17 +109,8 @@ function DashboardAnalytics({ products = [], formatCurrency }) {
   );
 
   function formatDate(value) {
-    if (!value) return "—";
-
-    const date = new Date(value);
-
-    if (Number.isNaN(date.getTime())) return "—";
-
-    return date.toLocaleString("en-IN", {
-      dateStyle: "medium",
-      timeStyle: "short",
-    });
-  }
+  return formatIstDateTime(value);
+}
 
   const money = (amount) =>
     formatCurrency
@@ -351,7 +343,7 @@ function DashboardAnalytics({ products = [], formatCurrency }) {
                         {movement.supplier?.companyName || "—"}
                       </td>
 
-                      <td>{formatDate(movement.createdAt)}</td>
+                      <td>{formatIstDateTime(movement.createdAt)}</td>
                     </tr>
                   ))}
                 </tbody>

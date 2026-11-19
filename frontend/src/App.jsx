@@ -9,6 +9,10 @@ import { useAuth } from "./auth/AuthContext";
 import Login from "./auth/Login";
 import { apiFetch } from "./services/api";
 import { useTheme } from "./ThemeContext";
+import {
+  formatIstDateTime,
+  getIstDateKey,
+} from "./utils/dateUtils";
 
 const emptyForm = {
   name: "",
@@ -136,17 +140,17 @@ async function loadArchivedProducts() {
 }, [activePage, token]);
 
   const filteredReportMovements = reportMovements.filter((movement) => {
-    if (!movement.createdAt) return !reportFromDate && !reportToDate;
-    const movementDate = new Date(movement.createdAt);
-    if (Number.isNaN(movementDate.getTime())) return false;
-    const date = [
-      movementDate.getFullYear(),
-      String(movementDate.getMonth() + 1).padStart(2, "0"),
-      String(movementDate.getDate()).padStart(2, "0"),
-    ].join("-");
-    return (!reportFromDate || date >= reportFromDate) &&
-      (!reportToDate || date <= reportToDate);
-  });
+  if (!movement.createdAt) return !reportFromDate && !reportToDate;
+
+  const date = getIstDateKey(movement.createdAt);
+
+  if (!date) return false;
+
+  return (
+    (!reportFromDate || date >= reportFromDate) &&
+    (!reportToDate || date <= reportToDate)
+  );
+});;
 
   const reportTotalIn = filteredReportMovements
     .filter((movement) => String(movement.type).toUpperCase() === "IN")
@@ -159,7 +163,7 @@ async function loadArchivedProducts() {
     const headers = ["Date", "Product", "SKU", "Movement Type", "Quantity", "Supplier"];
     const escapeCell = (value) => `"${String(value ?? "").replace(/"/g, '""')}"`;
     const rows = filteredReportMovements.map((movement) => [
-      movement.createdAt ? new Date(movement.createdAt).toLocaleString("en-IN") : "",
+      formatIstDateTime(movement.createdAt),
       movement.product?.name || "",
       movement.product?.sku || "",
       movement.type || "",
@@ -1072,7 +1076,7 @@ if (!response.ok) {
                   <tbody>
                     {!reportLoading && filteredReportMovements.map((movement) => (
                       <tr key={movement.id}>
-                        <td>{movement.createdAt ? new Date(movement.createdAt).toLocaleString("en-IN") : "—"}</td>
+                        <td>{formatIstDateTime(movement.createdAt)}</td>
                         <td className="product-name">{movement.product?.name || "—"}</td>
                         <td>{movement.product?.sku || "—"}</td>
                         <td><span className={`badge ${String(movement.type).toUpperCase() === "IN" ? "good" : "low"}`}>{movement.type || "—"}</span></td>

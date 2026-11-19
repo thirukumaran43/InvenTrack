@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "./auth/AuthContext";
 import { apiFetch } from "./services/api";
+import { formatIstDateTime } from "./utils/dateUtils";
 
 function StockMovements() {
   const { token } = useAuth();
@@ -211,13 +212,8 @@ function StockMovements() {
 
   // Format date
   function formatDate(value) {
-    if (!value) return "—";
-
-    return new Date(value).toLocaleString("en-IN", {
-      dateStyle: "medium",
-      timeStyle: "short",
-    });
-  }
+  return formatIstDateTime(value);
+}
 
   // Calculate expected stock
   const expectedStock = selectedProduct && quantity !== ""
@@ -496,7 +492,7 @@ function StockMovements() {
                 <tr key={movement.id}>
 
                   <td>
-                    {formatDate(movement.createdAt)}
+                    {formatIstDateTime(movement.createdAt)}
                   </td>
 
                   <td className="product-name">
