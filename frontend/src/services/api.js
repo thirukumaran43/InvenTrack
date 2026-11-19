@@ -1,23 +1,20 @@
+const BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
+export const API_BASE_URL = BASE_URL;
 
 let unauthorizedHandler = null;
 
-// Register the logout function from AuthContext
 export function setUnauthorizedHandler(handler) {
   unauthorizedHandler = handler;
 }
 
-// Common authenticated API request function
 export async function apiFetch(endpoint, token, options = {}) {
   if (!token) {
-    throw new Error(
-      "Authentication required. Please sign in again."
-    );
+    throw new Error("Authentication required. Please sign in again.");
   }
 
   const headers = new Headers(options.headers || {});
-
   headers.set("Authorization", `Bearer ${token}`);
 
   if (options.body && !headers.has("Content-Type")) {
@@ -34,9 +31,7 @@ export async function apiFetch(endpoint, token, options = {}) {
       unauthorizedHandler();
     }
 
-    throw new Error(
-      "Your session has expired. Please sign in again."
-    );
+    throw new Error("Your session has expired. Please sign in again.");
   }
 
   return response;

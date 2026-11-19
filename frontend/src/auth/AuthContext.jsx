@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { API_BASE_URL } from "../services/api";
 import { setUnauthorizedHandler } from "../services/api";
 import {
   createContext,
@@ -9,7 +10,7 @@ import {
 
 const AuthContext = createContext(null);
 
-const LOGIN_API = `${import.meta.env.VITE_API_BASE_URL || "http://localhost:8080"}/api/auth/login`;
+const LOGIN_API = `${API_BASE_URL}/api/auth/login`;
 const SESSION_STORAGE_KEY = "inventrack_session";
 
 function readStoredSession() {
